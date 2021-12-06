@@ -6,11 +6,11 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 15:27:37 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/04 16:48:55 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/06 19:12:09 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 size_t	get_time(struct timeval start)
 {
@@ -22,11 +22,9 @@ size_t	get_time(struct timeval start)
 	return (tiempo);
 }
 
-void	print_mess(size_t id, char *s, struct timeval start, pthread_mutex_t *wr)
+void	print_mess(size_t id, char *s, struct timeval start)
 {
-	pthread_mutex_lock(wr);
 	printf("%zu Ph[%02zu] %s\n", get_time(start), id, s);
-	pthread_mutex_unlock(wr);
 }
 
 int	ft_strlen(char *s)
