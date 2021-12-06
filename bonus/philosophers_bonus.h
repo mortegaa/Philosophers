@@ -25,7 +25,6 @@ typedef struct	s_philo
 	size_t		teat;
 	size_t		tsleep;
 	size_t		t;
-	bool		*f;
 	size_t		meals;
 	struct timeval		start;
 }		t_philo;
@@ -36,7 +35,6 @@ typedef struct	s_waiter
 	size_t		n_philos;
 	t_philo		**philos;
 	size_t		tdie;
-	bool		*f;
 	size_t		meals;
 	struct timeval		start;
 	

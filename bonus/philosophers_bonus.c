@@ -40,7 +40,7 @@ t_general	read_arguments(int argc, char **argv)
 	return (g);
 }
 
-t_philo	**prepare_commensals(t_general *g, pthread_mutex_t **forks, bool *f, pthread_mutex_t *write)
+t_philo	**prepare_commensals(t_general *g, bool *f)
 {
 	size_t	i;
 	t_philo	**philos;
@@ -53,37 +53,14 @@ t_philo	**prepare_commensals(t_general *g, pthread_mutex_t **forks, bool *f, pth
 		philos[i]->id = i + 1;
 		philos[i]->teat = g->teat;
 		philos[i]->tsleep = g->tsleep;
-		philos[i]->left_fork = forks[i];
-		if (i == g->n_philos - 1)
-			philos[i]->right_fork = forks[0];
-		else
-			philos[i]->right_fork = forks[i + 1];
 		philos[i]->t = 0;
 		philos[i]->f = f;
 		philos[i]->meals = 0;
 		philos[i]->start = g->start;
-		philos[i]->write = write;
 		i++;
 	}
 	return (philos);
 }
-
-pthread_mutex_t **prepare_forks(size_t n_philos)
-{
-	size_t	i;
-	pthread_mutex_t	**forks;
-
-	forks = (pthread_mutex_t **)malloc(sizeof(pthread_mutex_t *) * n_philos);
-	i = 0;
-	while (i < n_philos)
-	{
-		forks[i] = malloc(sizeof(pthread_mutex_t));
-		pthread_mutex_init(forks[i], NULL);	
-		i++;
-	}
-	return (forks);
-}
-
 void	prepare_waiter(t_waiter *waiter, t_general*g, t_philo **philos, bool *f)
 {
 	waiter->n_philos = g->n_philos;
@@ -103,10 +80,8 @@ void	lay_the_table(t_general *g)
 	t_waiter	waiter;
 	bool		f;
 
-	forks = prepare_forks(g->n_philos);
 	philos = prepare_commensals(g, &f);
-	prepare_waiter(&waiter, g, philos, &f);
-	waiter.write = &write;
+//	prepare_waiter(&waiter, g, philos, &f);
 	meal(philos, forks, &waiter);
 }
 
@@ -140,62 +115,62 @@ void	*monitoring(void *lks)
 	}
 	return (NULL);
 }
-void	*routine(t_philo *ph)
-{
-	sem_t	*forks;
-	pid_t	pid;
 
-	forks = sem_open("FORKS", O_CREAT, 0660, ph->n_philos);
+void	call_philo(t_philo *ph)
+{
+	pid_t	pid;
+	t_waiter waiter;
+
+//	prepare_waiter(&waiter, g, philos, &f);
 	pid = fork();
 	if (!pid)
 		return ;
 	else
-		routine();
-	while (*(ph->f) == true)
-		;
+		routine(ph);
+}
+
+void	routine(t_philo *ph)
+{
+	sem_t	*forks;
+	sem_t	*death;
+
+	forks = sem_open("FORKS", O_CREATE, 0660, n_philos);
+	pthread_create(&(waiter->thread), NULL, &monitoring, waiter);
+	death = sem_open("")
 	printf("Ph[%02zu] has arrived\n", ph->id);
 	while (1)
 	{
 		if (*(ph->f) == true)
 			break ;
-		pthread_mutex_lock(ph->left_fork);
-		print_mess(ph->id, "has taken a fork", ph->start, ph->write);
-		pthread_mutex_lock(ph->right_fork);
-		print_mess(ph->id, "has taken a fork", ph->start, ph->write);
+		sem_wait(forks);
+		print_mess(ph->id, "has taken a fork", ph->start);
+		sem_wait(forks);
+		print_mess(ph->id, "has taken a fork", ph->start);
 		ph->t = get_time(ph->start);
-		print_mess(ph->id, "is eating", ph->start, ph->write);
+		print_mess(ph->id, "is eating", ph->start);
 		usleep(ph->teat * 1000);
 		ph->meals++;
-		pthread_mutex_unlock(ph->left_fork);
-		pthread_mutex_unlock(ph->right_fork);
-		print_mess(ph->id, "is sleeping", ph->start, ph->write);
+		sem_post(forks);
+		sem_post(forks);
+		print_mess(ph->id, "is sleeping", ph->start);
 		usleep(ph->tsleep * 1000);
-		print_mess(ph->id, "is thinking", ph->start, ph->write);
+		print_mess(ph->id, "is thinking", ph->start);
 	}
-	return (NULL);
 }
 
 void	meal(t_philo **philos, t_waiter *waiter)
 {
 	size_t	i;
+	sem_t	forks;
 
 	forks = sem_open("FORKS", 0_CREAT, 0660, waiter->n_philos);
 	*(waiter->f) = true;
 	// Cambiar los hilos por procesos
 	// Es necesario el hilo que controlaba a todo el mundo??
-	pthread_create(&(waiter->thread), NULL, &monitoring, waiter);
 	i = 0;
 	while (i < waiter->n_philos)
 	{
-		pthread_create(&(philos[i]->thread), NULL, &routine, philos[i]);
-		i++;
-	}
-	*(waiter->f) = false;
-	pthread_join(waiter->thread, NULL);
-	i = 0;
-	while (i < waiter->n_philos)
-	{
-		pthread_join(philos[i]->thread, NULL);
+		call_philo(philos[i]);
 		i++;
 	}
 	printf("Comida terminada\n");
