@@ -6,14 +6,19 @@
 #    By: mortega- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 09:21:58 by mortega-          #+#    #+#              #
-#    Updated: 2021/12/04 17:29:12 by mortega-         ###   ########.fr        #
+#    Updated: 2021/12/07 21:48:34 by mortega-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	=	srcs/philosophers.c\
+			srcs/table.c\
+			srcs/threads.c\
 			srcs/utils.c
 
-SRCS_BONUS	=	bonus/philosophers_bonus.c \
+SRCS_BONUS	=	bonus/philosophers_bonus.c\
+				bonus/table_bonus.c\
+				bonus/processes_bonus.c\
+				bonus/threads_bonus.c\
 				bonus/utils_bonus.c
 
 OBJS	=	${SRCS:.c=.o}

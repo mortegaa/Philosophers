@@ -54,19 +54,15 @@ void	exit_mess(char *mess);
 int	ft_atoi(const char *str);
 
 /*
-**	COMMENSALS FUNCTIONS
+**	THREADS FUNCTIONS
 */
-t_philo	**prepare_commensals(t_general *g);
 void	*routine(void *lks);
-/*
-**	WAITER FUNCTIONS
-*/
 void	prepare_waiter(t_waiter *waiter, t_general *g, t_philo *philos, bool *f);
 void	*monitoring(void *lks);
+
 /*
 **	MEAL FUNCTIONS
 */
-pthread_mutex_t	**prepare_forks(size_t n_philos);
 void	lay_the_table(t_general *g);
 void	meal(t_philo **philos, t_general *g);
 
