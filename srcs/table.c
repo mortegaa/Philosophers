@@ -6,13 +6,14 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:30:22 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/07 21:31:28 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/07 22:22:10 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philosophers.h"
+#include "philosophers.h"
 
-static t_philo	**prepare_commensals(t_general *g, pthread_mutex_t **forks, bool *f, pthread_mutex_t *write)
+static t_philo	**prepare_commensals(t_general *g,
+		pthread_mutex_t **forks, bool *f, pthread_mutex_t *write)
 {
 	int		i;
 	t_philo	**philos;
@@ -40,7 +41,7 @@ static t_philo	**prepare_commensals(t_general *g, pthread_mutex_t **forks, bool 
 	return (philos);
 }
 
-static pthread_mutex_t **prepare_forks(size_t n_philos)
+static pthread_mutex_t	**prepare_forks(size_t n_philos)
 {
 	size_t			i;
 	pthread_mutex_t	**forks;
@@ -56,7 +57,8 @@ static pthread_mutex_t **prepare_forks(size_t n_philos)
 	return (forks);
 }
 
-static void	prepare_waiter(t_waiter *waiter, t_general*g, t_philo **philos, bool *f)
+static void	prepare_waiter(t_waiter *waiter,
+		t_general*g, t_philo **philos, bool *f)
 {
 	waiter->n_philos = g->n_philos;
 	waiter->tdie = g->tdie;
@@ -66,7 +68,6 @@ static void	prepare_waiter(t_waiter *waiter, t_general*g, t_philo **philos, bool
 	waiter->start = g->start;
 	waiter->meals = g->meals;
 }
-
 
 void	lay_the_table(t_general *g)
 {
@@ -83,4 +84,3 @@ void	lay_the_table(t_general *g)
 	waiter.write = &write;
 	meal(philos, &waiter, forks);
 }
-

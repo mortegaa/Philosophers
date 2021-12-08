@@ -6,7 +6,7 @@
 #    By: mortega- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 09:21:58 by mortega-          #+#    #+#              #
-#    Updated: 2021/12/07 21:48:34 by mortega-         ###   ########.fr        #
+#    Updated: 2021/12/08 10:39:19 by mortega-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ OBJS_BONUS	=	${SRCS_BONUS:.c=.o}
 
 NAME	=	philo
 
-NAME_BONUS	=	philobonus
+NAME_BONUS	=	philo_bonus
 
 CFLAGS	=	-Wall -Werror -Wextra -pthread
 

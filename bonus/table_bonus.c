@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:37:56 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/07 21:44:26 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/07 22:32:22 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_philo	**prepare_commensals(t_general *g)
 {
-	size_t	i;
+	int		i;
 	t_philo	**philos;
 
 	philos = (t_philo **)malloc(sizeof(t_philo *) * g->n_philos);
@@ -40,4 +40,3 @@ void	lay_the_table(t_general *g)
 	philos = prepare_commensals(g);
 	meal(philos, g);
 }
-

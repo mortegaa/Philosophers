@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 15:13:01 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/07 21:41:42 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/08 10:55:56 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_general	read_arguments(int argc, char **argv)
 		if (g.meals < 0)
 			exit_mess("No valid parameter value\n");
 	}
-	if (g.n_philos < 0 || g.meals < 0)
+	if (g.n_philos < 0)
 		exit_mess("No valid parameter value");
 	else if (g.n_philos == 0)
 		exit_mess("There is no commensals :(\n");
@@ -45,6 +45,7 @@ int	main(int argc, char **argv)
 	t_general		g;
 	struct timeval	start;
 
+	sem_unlink("FORKS");
 	g = read_arguments(argc, argv);
 	gettimeofday(&start, NULL);
 	g.start = start;

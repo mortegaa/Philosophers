@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 15:27:37 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/07 21:47:31 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/07 22:31:34 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 size_t	get_time(struct timeval start)
 {
 	struct timeval	t;
-	size_t	tiempo;
+	size_t			tiempo;
 
 	gettimeofday(&t, NULL);
-	tiempo = ((t.tv_sec * 1000 - start.tv_sec * 1000) + (t.tv_usec - start.tv_usec) / 1000);
+	tiempo = ((t.tv_sec * 1000 - start.tv_sec * 1000)
+			+ (t.tv_usec - start.tv_usec) / 1000);
 	return (tiempo);
 }
 
@@ -29,7 +30,8 @@ void	print_mess(size_t id, char *s, struct timeval start)
 
 int	ft_strlen(char *s)
 {
-	int len;
+	int	len;
+
 	len = 0;
 	while (s[len])
 		len++;
@@ -44,7 +46,7 @@ void	exit_mess(char *mess)
 
 int	ft_atoi(const char *str)
 {
-	int sum;
+	int	sum;
 	int	i;
 
 	i = -1;

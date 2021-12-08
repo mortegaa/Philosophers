@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:31:46 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/07 21:34:13 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/07 22:22:29 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,3 @@ void	meal(t_philo **philos, t_waiter *waiter, pthread_mutex_t **forks)
 	}
 	printf("Meal finished\n");
 }
-

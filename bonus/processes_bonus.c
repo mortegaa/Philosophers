@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:40:12 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/07 21:44:58 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/08 10:57:27 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ static void	call_philo(t_philo *ph, t_general *g)
 	bool		f;
 
 	ph->pid = fork();
-	if (ph->pid)
-		return ;
-	else
+	if (!ph->pid)
 	{
 		prepare_waiter(&waiter, g, ph, &f);
 		ph->f = &f;
@@ -35,10 +33,8 @@ static void	call_philo(t_philo *ph, t_general *g)
 
 void	meal(t_philo **philos, t_general *g)
 {
-	size_t	i;
-	sem_t	*forks;
+	int		i;
 
-	forks = sem_open("FORKS", O_CREAT, 0660, g->n_philos);
 	i = 0;
 	while (i < g->n_philos)
 	{
@@ -52,7 +48,6 @@ void	meal(t_philo **philos, t_general *g)
 		kill(philos[i]->pid, SIGKILL);
 		i++;
 	}
-	sem_close(forks);
 	sem_unlink("FORKS");
 	printf("Meal finished\n");
 }

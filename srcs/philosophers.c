@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 15:13:01 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/07 21:33:03 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/07 22:14:52 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ static t_general	read_arguments(int argc, char **argv)
 	return (g);
 }
 
-
-
-int	main(int argc, char **argv)		//
+int	main(int argc, char **argv)
 {
 	t_general		g;
 	struct timeval	start;
