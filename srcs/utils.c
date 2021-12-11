@@ -12,6 +12,15 @@
 
 #include "philosophers.h"
 
+void	ft_msleep(size_t time)
+{
+	struct timeval sleep;
+
+	gettimeofday(&sleep, NULL);
+	while (get_time(sleep) < time)
+		;
+}
+
 size_t	get_time(struct timeval start)
 {
 	struct timeval	t;

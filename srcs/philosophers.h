@@ -60,6 +60,7 @@ typedef struct s_waiter
 /*
 **	UTILS FUNCTIONS
 */
+void	ft_msleep(size_t time);
 size_t	get_time(struct timeval start);
 void	print_mess(size_t id, char *s,
 			struct timeval start, pthread_mutex_t *wr);

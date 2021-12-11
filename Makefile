@@ -34,11 +34,11 @@ CFLAGS	=	-Wall -Werror -Wextra -pthread
 .c.o:
 			@gcc ${CFLAGS} -c $< -o ${<:.c=.o}
 
-$(NAME):	${OBJS} ${Lib} ${Gnl} ${Mlx}
-			@gcc -o ${NAME} ${OBJS} ${Lib} ${Gnl} ${Mlx}
+$(NAME):	${OBJS}
+			@gcc -o ${NAME} ${OBJS}
 
-bonus:		${OBJS_BONUS} ${Lib} ${Gnl} ${Mlx}
-			@gcc -o ${NAME_BONUS} ${OBJS_BONUS} ${Lib} ${Gnl} ${Mlx}
+bonus:		${OBJS_BONUS}
+			@gcc -o ${NAME_BONUS} ${OBJS_BONUS}
 
 all:		${NAME}
 
