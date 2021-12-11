@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 15:27:37 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/11 19:02:36 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/11 19:24:57 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,6 @@ int	get_time(struct timeval start)
 
 void	print_mess(size_t id, char *s, struct timeval start, sem_t *write)
 {
-	size_t	time;
-
-	time = get_time(start);
-	//printf("time = %zu\n", time);
 	sem_wait(write);
 	printf("%d Ph[%02zu] %s\n", get_time(start), id, s);
 	sem_post(write);

@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:41:55 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/11 19:03:14 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/11 19:27:19 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,6 @@ void	*monitoring(void *lks)
 	{
 		if ((time = get_time(wt->start) - wt->philo->t) > (int)wt->tdie)
 		{
-	//		printf("Die = %d ", get_time(wt->start));
-	//		printf("- philoT = %d", wt->philo->t);
-	//		printf("> Muere en %zu\n", wt->tdie);
-	//		printf("Time = %d\n", time);
 			*(wt->f) = true;
 			print_mess(wt->philo->id, "died", wt->start, write);
 			break ;
@@ -73,17 +69,14 @@ void	*routine(void *lks)
 			break ;
 		print_mess(ph->id, "has taken a fork", ph->start, write);
 		sem_wait(forks);
+		ph->t = get_time(ph->start) + 7;
 		if (*(ph->f) == true)
 			break ;
 		print_mess(ph->id, "has taken a fork", ph->start, write);
-		ph->t = get_time(ph->start);
-	//	printf("T[%02zu] = %d\n", ph->id, ph->t);
 		if (*(ph->f) == true)
 			break ;
 		print_mess(ph->id, "is eating", ph->start, write);
 		ft_msleep(ph->teat);
-		//ph->t = get_time(ph->start);
-//		usleep(ph->teat * 1000);
 		ph->meals++;
 		if (*(ph->f) == true)
 			break ;
@@ -91,7 +84,6 @@ void	*routine(void *lks)
 		sem_post(forks);
 		sem_post(forks);
 		ft_msleep(ph->tsleep);
-//		usleep(ph->tsleep * 1000);
 	}
 	sem_close(write);
 	sem_close(forks);
