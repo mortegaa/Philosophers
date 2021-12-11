@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:31:46 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/07 22:22:29 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/11 15:16:01 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static bool	check_life(size_t i, t_waiter *wt)
 {
-	static size_t philos = 0;
+	size_t	j;
+	size_t	n;
 
 	if (get_time(wt->start) - wt->philos[i]->t > wt->tdie)
 	{
@@ -23,8 +24,13 @@ static bool	check_life(size_t i, t_waiter *wt)
 		return (false);
 	}
 	else if (wt->meals > 0 && wt->philos[i]->meals == wt->meals)
-		philos++;
-	if (philos == wt->n_philos)
+		wt->philomeals[i] = true;
+	j = -1;
+	n = 0;
+	while (++j < wt->n_philos)
+		if (wt->philomeals[j] == true)
+			n++;
+	if (n == wt->n_philos)
 	{
 		*(wt->f) = true;
 		return (false);
@@ -77,6 +83,10 @@ static void	*routine(void *lks)
 	t_philo	*ph;
 
 	ph = (t_philo *)lks;
+	if (ph->even == true && (ph->id & 1) == 1)
+		eating(ph);
+	else
+		usleep(1);
 	while (*(ph->f) == false)
 	{	
 		print_mess(ph->id, "is thinking", ph->start, ph->write);
@@ -85,6 +95,8 @@ static void	*routine(void *lks)
 			break ;
 		print_mess(ph->id, "is sleeping", ph->start, ph->write);
 		ft_msleep(ph->tsleep);
+		if (*(ph->f) == true)
+			break ;
 	}
 	return (NULL);
 }

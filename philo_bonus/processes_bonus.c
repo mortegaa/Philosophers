@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:40:12 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/08 10:57:27 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/11 17:35:08 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	meal(t_philo **philos, t_general *g)
 	while (i < g->n_philos)
 	{
 		call_philo(philos[i], g);
+		usleep(10);
 		i++;
 	}
 	waitpid(0, NULL, 0);
@@ -48,6 +49,7 @@ void	meal(t_philo **philos, t_general *g)
 		kill(philos[i]->pid, SIGKILL);
 		i++;
 	}
+	sem_unlink("WRITE");
 	sem_unlink("FORKS");
 	printf("Meal finished\n");
 }

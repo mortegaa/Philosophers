@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:30:22 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/07 22:22:10 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/11 14:56:35 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static t_philo	**prepare_commensals(t_general *g,
 			philos[i]->right_fork = forks[i + 1];
 		philos[i]->t = 0;
 		philos[i]->f = f;
+		philos[i]->even = !(g->n_philos & 1);
 		philos[i]->meals = 0;
 		philos[i]->start = g->start;
 		philos[i]->write = write;
@@ -60,6 +61,12 @@ static pthread_mutex_t	**prepare_forks(size_t n_philos)
 static void	prepare_waiter(t_waiter *waiter,
 		t_general*g, t_philo **philos, bool *f)
 {
+	int	i;
+
+	waiter->philomeals = malloc(sizeof(bool) * g->n_philos);
+	i = -1;
+	while (++i < g->n_philos)
+		waiter->philomeals[i] = false;
 	waiter->n_philos = g->n_philos;
 	waiter->tdie = g->tdie;
 	waiter->philos = philos;

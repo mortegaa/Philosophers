@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 15:13:01 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/08 10:55:56 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/11 17:22:02 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	main(int argc, char **argv)
 	struct timeval	start;
 
 	sem_unlink("FORKS");
+	sem_unlink("WRITE");
 	g = read_arguments(argc, argv);
 	gettimeofday(&start, NULL);
 	g.start = start;

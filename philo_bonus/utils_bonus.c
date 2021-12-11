@@ -6,11 +6,20 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 15:27:37 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/07 22:31:34 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/11 17:23:57 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
+
+void	ft_msleep(size_t time)
+{
+	struct timeval init;
+
+	gettimeofday(&init, NULL);
+	while (get_time(init) < time)
+		;
+}
 
 size_t	get_time(struct timeval start)
 {
@@ -23,9 +32,11 @@ size_t	get_time(struct timeval start)
 	return (tiempo);
 }
 
-void	print_mess(size_t id, char *s, struct timeval start)
+void	print_mess(size_t id, char *s, struct timeval start, sem_t *write)
 {
+	sem_wait(write);
 	printf("%zu Ph[%02zu] %s\n", get_time(start), id, s);
+	sem_post(write);
 }
 
 int	ft_strlen(char *s)

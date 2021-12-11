@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:37:56 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/07 22:32:22 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/11 16:57:24 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static t_philo	**prepare_commensals(t_general *g)
 		philos[i]->id = i + 1;
 		philos[i]->teat = g->teat;
 		philos[i]->tsleep = g->tsleep;
+		philos[i]->n_philos = g->n_philos;
 		philos[i]->t = 0;
 		philos[i]->meals = 0;
 		philos[i]->start = g->start;

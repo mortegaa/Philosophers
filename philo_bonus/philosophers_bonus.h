@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   philosophers_bonus.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/07 22:15:14 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/07 22:20:40 by mortega-         ###   ########.fr       */
+/*   Created: 2021/12/07 22:24:55 by mortega-          #+#    #+#             */
+/*   Updated: 2021/12/11 17:25:17 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef PHILOSOPHERS_BONUS_H
+# define PHILOSOPHERS_BONUS_H
 
 # include <stdbool.h>
 # include <stdio.h>
-# include <sys/time.h>
 # include <pthread.h>
+# include <sys/time.h>
+# include <signal.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <semaphore.h>
 
 typedef struct s_general
 {
@@ -34,11 +36,10 @@ typedef struct s_philo
 {
 	pthread_t		thread;
 	size_t			id;
+	pid_t			pid;
 	size_t			teat;
 	size_t			tsleep;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
-	pthread_mutex_t	*write;
+	size_t			n_philos;
 	size_t			t;
 	bool			*f;
 	size_t			meals;
@@ -49,11 +50,10 @@ typedef struct s_waiter
 {
 	pthread_t		thread;
 	size_t			n_philos;
-	t_philo			**philos;
+	t_philo			*philo;
 	size_t			tdie;
 	bool			*f;
 	size_t			meals;
-	pthread_mutex_t	*write;
 	struct timeval	start;
 }		t_waiter;
 
@@ -62,15 +62,22 @@ typedef struct s_waiter
 */
 void	ft_msleep(size_t time);
 size_t	get_time(struct timeval start);
-void	print_mess(size_t id, char *s,
-			struct timeval start, pthread_mutex_t *wr);
+void	print_mess(size_t id, char *s, struct timeval start, sem_t *write);
 void	exit_mess(char *mess);
 int		ft_atoi(const char *str);
+
+/*
+**	THREADS FUNCTIONS
+*/
+void	*routine(void *lks);
+void	prepare_waiter(t_waiter *waiter,
+			t_general *g, t_philo *philos, bool *f);
+void	*monitoring(void *lks);
 
 /*
 **	MEAL FUNCTIONS
 */
 void	lay_the_table(t_general *g);
-void	meal(t_philo **philos, t_waiter *waiter, pthread_mutex_t **forks);
+void	meal(t_philo **philos, t_general *g);
 
 #endif
