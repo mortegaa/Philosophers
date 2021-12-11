@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 22:24:55 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/11 17:25:17 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/11 19:02:11 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_philo
 	size_t			teat;
 	size_t			tsleep;
 	size_t			n_philos;
-	size_t			t;
+	int				t;
 	bool			*f;
 	size_t			meals;
 	struct timeval	start;
@@ -60,8 +60,8 @@ typedef struct s_waiter
 /*
 **	UTILS FUNCTIONS
 */
-void	ft_msleep(size_t time);
-size_t	get_time(struct timeval start);
+void	ft_msleep(int time);
+int		get_time(struct timeval start);
 void	print_mess(size_t id, char *s, struct timeval start, sem_t *write);
 void	exit_mess(char *mess);
 int		ft_atoi(const char *str);

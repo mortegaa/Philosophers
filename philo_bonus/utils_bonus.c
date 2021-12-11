@@ -6,13 +6,13 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 15:27:37 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/11 17:23:57 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/11 19:02:36 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-void	ft_msleep(size_t time)
+void	ft_msleep(int time)
 {
 	struct timeval init;
 
@@ -21,7 +21,7 @@ void	ft_msleep(size_t time)
 		;
 }
 
-size_t	get_time(struct timeval start)
+int	get_time(struct timeval start)
 {
 	struct timeval	t;
 	size_t			tiempo;
@@ -34,8 +34,12 @@ size_t	get_time(struct timeval start)
 
 void	print_mess(size_t id, char *s, struct timeval start, sem_t *write)
 {
+	size_t	time;
+
+	time = get_time(start);
+	//printf("time = %zu\n", time);
 	sem_wait(write);
-	printf("%zu Ph[%02zu] %s\n", get_time(start), id, s);
+	printf("%d Ph[%02zu] %s\n", get_time(start), id, s);
 	sem_post(write);
 }
 
