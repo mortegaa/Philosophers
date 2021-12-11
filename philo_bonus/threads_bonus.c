@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:41:55 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/11 19:27:19 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/11 21:17:31 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,34 @@ void	*monitoring(void *lks)
 	return (NULL);
 }
 
+void	eating(t_philo *ph, sem_t *forks, sem_t *write)
+{
+		print_mess(ph->id, "is thinking", ph->start, write);
+		if (*(ph->f) == true)
+			return ;
+		sem_wait(forks);
+		if (*(ph->f) == true)
+			return ;
+		print_mess(ph->id, "has taken a fork", ph->start, write);
+		sem_wait(forks);
+		ph->t = get_time(ph->start) + 7;
+		if (*(ph->f) == true)
+			return ;
+		print_mess(ph->id, "has taken a fork", ph->start, write);
+		if (*(ph->f) == true)
+			return ;
+		print_mess(ph->id, "is eating", ph->start, write);
+		ft_msleep(ph->teat);
+		ph->meals++;
+		if (*(ph->f) == true)
+			return ;
+		print_mess(ph->id, "is sleeping", ph->start, write);
+		sem_post(forks);
+		sem_post(forks);
+		ft_msleep(ph->tsleep);
+		return ;
+}
+
 void	*routine(void *lks)
 {
 	sem_t	*forks;
@@ -59,31 +87,9 @@ void	*routine(void *lks)
 	ph = (t_philo *)lks;
 	forks = sem_open("FORKS", O_CREAT, 0660, ph->n_philos);
 	write = sem_open("WRITE", O_CREAT, 0660, 1);
-	while (1)
+	while (*(ph->f) == false)
 	{
-		print_mess(ph->id, "is thinking", ph->start, write);
-		if (*(ph->f) == true)
-			break ;
-		sem_wait(forks);
-		if (*(ph->f) == true)
-			break ;
-		print_mess(ph->id, "has taken a fork", ph->start, write);
-		sem_wait(forks);
-		ph->t = get_time(ph->start) + 7;
-		if (*(ph->f) == true)
-			break ;
-		print_mess(ph->id, "has taken a fork", ph->start, write);
-		if (*(ph->f) == true)
-			break ;
-		print_mess(ph->id, "is eating", ph->start, write);
-		ft_msleep(ph->teat);
-		ph->meals++;
-		if (*(ph->f) == true)
-			break ;
-		print_mess(ph->id, "is sleeping", ph->start, write);
-		sem_post(forks);
-		sem_post(forks);
-		ft_msleep(ph->tsleep);
+		eating(ph, forks, write);
 	}
 	sem_close(write);
 	sem_close(forks);

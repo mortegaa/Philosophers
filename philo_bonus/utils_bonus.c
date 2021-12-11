@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 15:27:37 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/11 19:24:57 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/11 21:13:33 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,14 @@ void	print_mess(size_t id, char *s, struct timeval start, sem_t *write)
 	sem_post(write);
 }
 
-int	ft_strlen(char *s)
-{
-	int	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
-}
-
 void	exit_mess(char *mess)
 {
-	write(1, mess, ft_strlen(mess));
+	size_t	len;
+
+	len = 0;
+	while (mess[len])
+		len++;
+	write(1, mess, len);
 	exit(EXIT_FAILURE);
 }
 
