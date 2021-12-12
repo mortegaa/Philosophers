@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 15:27:37 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/11 21:13:33 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/12 11:50:19 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_msleep(int time)
 {
-	struct timeval init;
+	struct timeval	init;
 
 	gettimeofday(&init, NULL);
 	while (get_time(init) < time)

@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:31:46 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/11 15:16:01 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/12 12:38:58 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,8 @@ static void	*routine(void *lks)
 	t_philo	*ph;
 
 	ph = (t_philo *)lks;
-	if (ph->even == true && (ph->id & 1) == 1)
-		eating(ph);
-	else
-		usleep(1);
+	if ((ph->id & 1) == 0)
+		usleep(100);
 	while (*(ph->f) == false)
 	{	
 		print_mess(ph->id, "is thinking", ph->start, ph->write);

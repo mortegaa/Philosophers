@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 15:27:37 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/11 15:20:30 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/12 12:08:39 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	ft_msleep(size_t time)
 {
-	struct timeval sleep;
+	struct timeval	sleep;
 
 	gettimeofday(&sleep, NULL);
 	while (get_time(sleep) < time)
-			;
-	usleep(1);
+		;
+	usleep(100);
 }
 
 size_t	get_time(struct timeval start)
@@ -41,19 +41,14 @@ void	print_mess(size_t id, char *s,
 	pthread_mutex_unlock(wr);
 }
 
-int	ft_strlen(char *s)
-{
-	int	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
-}
-
 void	exit_mess(char *mess)
 {
-	write(1, mess, ft_strlen(mess));
+	size_t	len;
+
+	len = 0;
+	while (mess[len])
+		len++;
+	write(1, mess, len);
 	exit(EXIT_FAILURE);
 }
 

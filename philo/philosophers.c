@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 15:13:01 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/07 22:14:52 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/12 13:10:01 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_general	read_arguments(int argc, char **argv)
 			exit_mess("No valid parameter value\n");
 	}
 	if (g.n_philos < 0)
-		exit_mess("No valid parameter value");
+		exit_mess("No valid parameter value\n");
 	else if (g.n_philos == 0)
 		exit_mess("There is no commensals :(\n");
 	else if (g.meals == 0)
