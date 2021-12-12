@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:31:46 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/12 12:38:58 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/12 14:50:06 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void	*routine(void *lks)
 	t_philo	*ph;
 
 	ph = (t_philo *)lks;
-	if ((ph->id & 1) == 0)
+	if ((ph->id % 2) == 0)
 		usleep(100);
 	while (*(ph->f) == false)
 	{	
@@ -107,10 +107,10 @@ void	meal(t_philo **philos, t_waiter *waiter, pthread_mutex_t **forks)
 	while (i < waiter->n_philos && waiter->n_philos > 1)
 	{
 		pthread_create(&(philos[i]->thread), NULL, &routine, philos[i]);
+		usleep(100);
 		i++;
 	}
 	pthread_create(&(waiter->thread), NULL, &monitoring, waiter);
-	*(waiter->f) = false;
 	pthread_join(waiter->thread, NULL);
 	i = 0;
 	while (i < waiter->n_philos)

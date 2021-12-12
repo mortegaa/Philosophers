@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 22:15:14 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/12 12:31:54 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/12 14:33:41 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_waiter
 	t_philo			**philos;
 	size_t			tdie;
 	bool			*f;
+	bool			on;
 	size_t			meals;
 	bool			*philomeals;
 	pthread_mutex_t	*write;

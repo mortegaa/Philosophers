@@ -6,7 +6,7 @@
 /*   By: mortega- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:30:22 by mortega-          #+#    #+#             */
-/*   Updated: 2021/12/11 14:56:35 by mortega-         ###   ########.fr       */
+/*   Updated: 2021/12/12 14:35:05 by mortega-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	prepare_waiter(t_waiter *waiter,
 	waiter->tdie = g->tdie;
 	waiter->philos = philos;
 	waiter->f = f;
-	*(waiter->f) = true;
+	*(waiter->f) = false;
 	waiter->start = g->start;
 	waiter->meals = g->meals;
 }
