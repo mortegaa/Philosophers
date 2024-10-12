@@ -8,6 +8,12 @@ Yo lo he hecho de 2 maneras diferentes:
 Los filósofos se sientan como he dicho anteriormente y hay un tenedor a la izquierda y otro a la derecha de cada filósofo.
 Aquí cada filósofo es un hilo (thread) y comparten los recursos que son los tenedores. Los tenedores son protegidos por mutex.
 
+<img src="https://belski.me/images/Philosophers.png" width="500" heigth="500">
+<br>
+<br>
+
 * ## Procesos y semáfaros
 
 En este caso todos los tenedores están en el centro de la mesa y cada uno puede coger el que prefiera. Aquí cada filósofo es un proceso hijo del programa principal y los tenedores son protegidos con un semáfaro.
+
+![Phillo_image_sem](https://media.geeksforgeeks.org/wp-content/uploads/20231107114729/dining_philosopher_problem.png)
